@@ -21,19 +21,33 @@ class ViewController: UIViewController {
         Story(t: "You find a treasure chest.", c1: "Open it.", c2: "Check for traps.")
     ]
     
+    var storyNumber = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        storyLabel.text = example[0].title;
-        choice1Button.setTitle(example[0].choice1, for: .normal)
-        choice2Button.setTitle(example[0].choice2, for: .normal)
+        updateUI(n: 0)
     }
     
     @IBAction func choiceMade(_ sender: UIButton) {
+        
+        let answer = sender.currentTitle!
+        
+        if answer == example[storyNumber].choice1
+        {
+            updateUI(n: storyNumber+1)
+        }
+        else
+        {
+            updateUI(n: storyNumber+2)
+        }
     }
     
+    func updateUI(n: Int)
+    {
+        storyLabel.text = example[n].title
+        choice1Button.setTitle(example[n].choice1, for: .normal)
+        choice2Button.setTitle(example[n].choice2, for: .normal)
+    }
     
-    
-
-
 }
 
